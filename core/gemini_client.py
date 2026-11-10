@@ -3,7 +3,6 @@ from google import genai
 
 DEFAULT_MODEL = "gemini-3.8-flash"
 
-
 def generate_text(api_key: str, prompt: str, model: str = DEFAULT_MODEL) -> str:
     if not api_key:
         raise ValueError("Gemini API key is missing.")
@@ -13,7 +12,8 @@ def generate_text(api_key: str, prompt: str, model: str = DEFAULT_MODEL) -> str:
     interaction = client.interactions.create(
         model=model,
         input=prompt,
-        timeout=120,
+        timeout=60,
+        automatic_continuation=False,
     )
 
     result = interaction.output_text
