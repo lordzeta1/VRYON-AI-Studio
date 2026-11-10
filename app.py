@@ -4,6 +4,18 @@ from core.prompts import build_creator_prompt, build_rewrite_prompt
 from core.video_engine import render_video, make_srt
 from core.storage import safe_filename
 
+from core.gemini_client import generate_text
+
+if st.button("Test Gemini connection"):
+    try:
+        result = generate_text(
+            st.secrets["GEMINI_API_KEY"],
+            "Reply with exactly: VYRON ONLINE"
+        )
+        st.success(result)
+    except Exception as e:
+        st.error(f"{type(e).__name__}: {e}")
+        
 st.set_page_config(page_title="VYRON AI Studio", page_icon="🎬", layout="wide")
 st.markdown("""
 <style>
